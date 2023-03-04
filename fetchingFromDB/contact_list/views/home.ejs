@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>
+            <%= locals.title%>
+        </title>
+        <!-- below script is for the contact book image -->
+<script src="https://kit.fontawesome.com/4be5d91d91.js" crossorigin="anonymous"></script>
+<!-- since our css file need to be below among all        -->
+<link rel="stylesheet" href="/css/home.css">
+    </head>
+
+    <body> 
+        <h1>Rendered from EJS View! </h1>
+
+        <div>
+
+            <h1 id="page-heading">
+                <!-- book image -->
+                <i class="fas fa-address-book"></i>
+                My Contacts List
+            </h1>
+
+            <div id="contacts-list-container">
+                   <ul>
+                    <!-- creating a for loop to get all the contacts and this is our main logic.. -->
+                <% for (let i of contact_list) { %> 
+                    <li class="contact">
+                    <div class="details"> 
+                        <li>
+                            <!-- after entering the details we get this name and phone  in our fontend and this is our traversing purpose..-->
+                            <p><%= i.name %></p>
+                            <p><%= i.phone %></p>
+                        </li>
+                    </div>
+                    <div class="delete-button">
+                        <!-- for deleting purpose below line is for... -->
+                        <a href="/delete-contact/?id=<%= i._id %>">
+                            
+                            <i class="fa-solid fa-rectangle-xmark"></i>
+                        </a>
+                    </div>
+                    </li>   
+                <% } %>
+            </ul>
+        </div>
+
+
+        <!-- this is simply an form what we are filling there is just because of this only -->
+
+        <form  id="new-contact-form"action="/create-contact" method="POST">
+            <input type="text" name="name" placeholder="Enter name" required>
+            <input type="number" name="phone" placeholder="Enter phone" required>
+            <button type="submit">Add contact</button>
+        </form>
+
+    <!-- finally adding an  js file (assets file js folder ,home.js file) link here -->
+        <script type="text/javascript" src="/js/home.js"></script>
+    </body>
+</html>
